@@ -72,12 +72,20 @@
                     <li class="dropdown"><a href="#"><span>Info</span>
                             <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="#">Berita Terbaru</a></li>
-                            <li><a href="#">Informasi Pelatihan</a></li>
-                            <li><a href="faq.html">Pertanyaan Umum (FAQ)</a></li>
+                            <li>
+                                <a href="{{ route('public.news') }}"
+                                    class="{{ Route::is('public.news') ? 'active' : '' }}">Berita Terbaru</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('public.training') }}"
+                                    class="{{ Route::is('public.training') ? 'active' : '' }}">Informasi Pelatihan</a>
+                            </li>
+                            <li><a href="{{ route('public.faq') }}"
+                                    class="{{ Route::is('public.faq') ? 'active' : '' }}">Pertanyaan Umum
+                                    (FAQ)</a></li>
                         </ul>
                     </li>
-                    <li><a href="contact.html">PPID</a></li>
+                    <li><a href="#">PPID</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

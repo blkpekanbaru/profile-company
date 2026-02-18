@@ -76,4 +76,6 @@ class FaqController extends BaseController
             return response()->json(['error' => 'Gagal menghapus: ' . $e->getMessage()], 500);
         }
     }
+
+    
 }

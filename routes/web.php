@@ -24,8 +24,12 @@ Route::prefix('pelayanan')->name('service.')->group(function () {
     Route::get('/survei-kepuasan', [HomeController::class, 'surveySatisfaction'])->name('survey');
     Route::get('/pengaduan', [HomeController::class, 'complaint'])->name('complaint');
     Route::get('/survei-alumni', [HomeController::class, 'surveyAlumni'])->name('alumni');
-
 });
+
+Route::get('/faq', [HomeController::class, 'faq'])->name('public.faq');
+Route::get('/berita', [HomeController::class, 'news'])->name('public.news');
+Route::get('/informasi-pelatihan', [HomeController::class, 'trainingInfo'])->name('public.training');
+Route::get('/{post:slug}', [HomeController::class, 'postDetail'])->name('public.post.show');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

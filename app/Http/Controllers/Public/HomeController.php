@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Public;
 
-use App\Models\Post;
-use App\Models\Profile;
-use App\Models\Facility;
-use App\Models\Workshop;
-use App\Models\Department;
-use Illuminate\Http\Request;
+use App\Enums\PostCategoryEnum;
 use App\Enums\PostStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Facility;
+use App\Models\Faq;
+use App\Models\Post;
+use App\Models\Profile;
+use App\Models\Workshop;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -106,5 +108,61 @@ class HomeController extends Controller
             'title' => 'Survei Alumni Pelatihan',
             'form_url' => 'https://docs.google.com/forms/d/e/1FAIpQLSdKX-0LEmgI8_KBQAbm_rXhKAFvYUBdp_WO3YIcWCQT2c5Nbw/viewform?embedded=true'
         ]);
+    }
+
+    public function news()
+    {
+        $posts = Post::with(['images', 'categories'])
+            ->where('status', PostStatusEnum::PUBLISHED)
+            ->whereHas('categories', function ($q) {
+                $q->where('category', PostCategoryEnum::NEWS);
+            })
+            ->latest()
+            ->paginate(9);
+
+        $pageTitle = "Berita Terbaru";
+        return view('pages.posts.index', compact('posts', 'pageTitle'));
+    }
+
+    public function trainingInfo()
+    {
+        $posts = Post::with(['images', 'categories'])
+            ->where('status', PostStatusEnum::PUBLISHED)
+            ->whereHas('categories', function ($q) {
+                $q->where('category', PostCategoryEnum::TRAINING);
+            })
+            ->latest()
+            ->paginate(9);
+
+        $pageTitle = "Informasi Pelatihan";
+        return view('pages.posts.index', compact('posts', 'pageTitle'));
+    }
+
+    public function postDetail(Post $post)
+    {
+        if ($post->status !== PostStatusEnum::PUBLISHED) {
+            abort(404);
+        }
+
+        $relatedPosts = Post::with(['images'])
+            ->where('status', PostStatusEnum::PUBLISHED)
+            ->where('id', '!=', $post->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('pages.posts.show', compact('post', 'relatedPosts'));
+    }
+
+    public function faq()
+    {
+        // dd('hi');
+        $faqs = Faq::where('is_active', true)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+        $pageTitle = "Pertanyaan Umum (FAQ)";
+
+        return view('pages.faq', compact('faqs', 'pageTitle'));
     }
 }
