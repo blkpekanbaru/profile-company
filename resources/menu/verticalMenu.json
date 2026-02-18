@@ -1,0 +1,81 @@
+{
+    "menu": [
+        {
+            "url": "admin/dashboard",
+            "name": "Dashboard",
+            "icon": "menu-icon tf-icons ti ti-smart-home",
+            "slug": "dashboard"
+        },
+        {
+            "menuHeader": "Kejuruan & Pelatihan"
+        },
+        {
+            "url": "admin/department",
+            "name": "Kejuruan",
+            "icon": "menu-icon tf-icons ti ti-tool",
+            "slug": "department"
+        },
+        {
+            "url": "admin/workshop",
+            "name": "Pelatihan",
+            "icon": "menu-icon tf-icons ti ti-school",
+            "slug": "workshop"
+        },
+        {
+            "menuHeader": "Manajemen Konten"
+        },
+        {
+            "name": "Profil BLK",
+            "icon": "menu-icon tf-icons ti ti ti-building",
+            "slug": "profile",
+            "submenu": [
+                {
+                    "url": "admin/profile/history",
+                    "name": "Tentang",
+                    "slug": "profile-history"
+                },
+                {
+                    "url": "admin/profile/vision_mission",
+                    "name": "Visi Misi",
+                    "slug": "profile-vision-mission"
+                },
+                {
+                    "url": "admin/profile/structure",
+                    "name": "Struktur Organisasi",
+                    "slug": "profile-structure"
+                },
+                {
+                    "url": "admin/profile/main_task",
+                    "name": "Tugas Pokok",
+                    "slug": "profile-main-task"
+                },
+                {
+                    "url": "admin/profile/functions",
+                    "name": "Fungsi",
+                    "slug": "profile-functions"
+                }
+            ]
+        },
+        {
+            "url": "admin/facility",
+            "name": "Sarana Prasarana",
+            "icon": "menu-icon tf-icons ti ti ti-tools",
+            "slug": "facility"
+        },
+        {
+            "menuHeader": "Manajemen Informasi"
+        },
+        {
+            "url": "admin/information",
+            "name": "Info & Berita",
+            "icon": "menu-icon tf-icons ti ti ti-news",
+            "slug": "posts-berita"
+        },
+        {
+            "url": "admin/faq",
+            "name": "FAQ",
+            "icon": "menu-icon tf-icons ti ti ti-help",
+            "slug": "faq"
+        }
+    ]
+}
