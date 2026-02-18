@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
-                            <a href="#" class="btn btn-primary">Lihat Jadwal Pelatihan</a>
+                            <a href="{{ route('public.training') }}" class="btn btn-primary">Lihat Jadwal Pelatihan</a>
                             <a href="{{ route('about') }}" class="btn btn-outline glightbox">Tentang Kami</a>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                                     <span>Lihat Lebih Banyak</span>
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
-                                <a href="#" class="secondary-cta">
+                                <a href="{{ route('facilities') }}" class="secondary-cta">
                                     <span>Lihat Fasilitas</span>
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
@@ -196,7 +196,8 @@
                                                     {{ $dept->description ?? 'Deskripsi belum tersedia untuk kejuruan ini.' }}
                                                 </p>
                                                 <div class="mt-1">
-                                                    <a href="#" class="btn btn-primary px-4 py-2"
+                                                    <a href="{{ route('workshop.detail', $dept->slug) }}"
+                                                        class="btn btn-primary px-4 py-2"
                                                         style="background-color: #00154c; border: none; border-radius: 20px;">
                                                         <i class="fas fa-search me-2"></i> Lihat Pelatihan Ini
                                                     </a>
