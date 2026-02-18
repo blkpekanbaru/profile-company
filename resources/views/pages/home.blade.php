@@ -225,43 +225,41 @@
 
             <div class="row g-5">
 
-                @foreach ($posts as $post)
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-                        <div class="department-card">
-                            {{-- Ikon Kategori (Ambil kategori pertama) --}}
-                            <div class="department-icon">
-                                <i class="fas fa-bullhorn"></i>
-                            </div>
-
+                @forelse ($posts as $post)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="department-card h-100 shadow-sm border-0">
                             <div class="department-image">
-                                @if ($post->images->isNotEmpty())
-                                    <img src="{{ $post->images->first()->url }}" alt="{{ $post->title }}"
-                                        class="img-fluid">
-                                @else
-                                    <img src="{{ asset('assets/img/posts/blk-3d.jpg') }}" class="img-fluid">
-                                @endif
+                                <img src="{{ $post->images->isNotEmpty() ? $post->images->first()->url : asset('assets/img/posts/blk-3d.jpg') }}"
+                                    alt="{{ $post->title }}" class="img-fluid">
                             </div>
 
                             <div class="department-content">
-                                {{-- Menampilkan Label Kategori --}}
                                 <div class="mb-2">
                                     @foreach ($post->categories as $cat)
-                                        <span class="badge bg-light text-primary border">{{ $cat->category }}</span>
+                                        <span class="badge bg-light text-primary border border-primary me-1">
+                                            {{ $cat->category->label() }}
+                                        </span>
                                     @endforeach
+                                    <small class="text-muted ms-2"><i class="far fa-calendar-alt"></i>
+                                        {{ $post->created_at->format('d M Y') }}</small>
                                 </div>
 
-                                <h3>{{ Str::limit($post->title) }}</h3>
+                                <h3 class="h5 fw-bold">{{ Str::limit($post->title, 60) }}</h3>
+                                <p>{{ Str::limit(strip_tags($post->content), 120) }}</p>
 
-                                <p>{{ Str::limit(strip_tags($post->content), 100) }}</p>
-
-                                <a href="#" class="learn-more">
-                                    <span>Selengkapnya</span>
+                                <a href="{{ route('public.post.show', $post->slug) }}" class="learn-more">
+                                    <span>Baca Selengkapnya</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-12 text-center py-5">
+                        <img src="{{ asset('assets/img/empty.svg') }}" style="width: 200px" alt="Kosong">
+                        <p class="mt-3 text-muted">Belum ada artikel yang diterbitkan di kategori ini.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section><!-- /Departments Section -->

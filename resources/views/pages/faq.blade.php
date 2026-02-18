@@ -5,12 +5,12 @@
 @section('content')
     <div class="page-title">
         <div class="heading">
-            <div class="container">
+            <div class="container" data-aos="fade-up">
                 <div class="row d-flex justify-content-center text-center">
                     <div class="col-lg-8">
                         <h1 class="heading-title">Frequenty Asked Questions</h1>
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
-                            ullamcorper mattis, pulvinar dapibus leo.</p>
+                        <p class="mb-0">Temukan jawaban cepat untuk pertanyaan yang sering diajukan seputar layanan kami.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -71,3 +71,35 @@
 
     </section>
 @endsection
+
+@push('styles')
+    <style>
+        .page-title {
+            background: linear-gradient(135deg, var(--surface-color) 0%, color-mix(in srgb, var(--accent-color), transparent 95%) 100%) !important;
+            overflow: hidden;
+        }
+
+        .page-title::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("/assets/img/bg/abstract-bg-3.webp") center/cover;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .page-title .heading,
+        .page-title nav {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title .heading h1 {
+            font-weight: 700 !important;
+            color: var(--heading-color);
+        }
+    </style>
+@endpush

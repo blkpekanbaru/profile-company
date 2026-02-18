@@ -25,7 +25,7 @@
         </nav>
     </div>
 
-    <section class="section">
+    <section id="departments" class="departments section">
         <div class="container" data-aos="fade-up">
             <div class="row gy-4">
                 @forelse ($posts as $post)
@@ -39,8 +39,9 @@
                             <div class="department-content">
                                 <div class="mb-2">
                                     @foreach ($post->categories as $cat)
-                                        <span
-                                            class="badge bg-light text-primary border-primary border">{{ $cat->category->name }}</span>
+                                        <span class="badge bg-light text-primary border border-primary me-1">
+                                            {{ $cat->category->label() }}
+                                        </span>
                                     @endforeach
                                     <small class="text-muted ms-2"><i class="far fa-calendar-alt"></i>
                                         {{ $post->created_at->format('d M Y') }}</small>
@@ -71,3 +72,35 @@
         </div>
     </section>
 @endsection
+
+@push('styles')
+    <style>
+        .page-title {
+            background: linear-gradient(135deg, var(--surface-color) 0%, color-mix(in srgb, var(--accent-color), transparent 95%) 100%) !important;
+            overflow: hidden;
+        }
+
+        .page-title::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("/assets/img/bg/abstract-bg-3.webp") center/cover;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .page-title .heading,
+        .page-title nav {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title .heading h1 {
+            font-weight: 700 !important;
+            color: var(--heading-color);
+        }
+    </style>
+@endpush
