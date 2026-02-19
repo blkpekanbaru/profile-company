@@ -62,7 +62,7 @@
                         </a>
                         <ul>
                             <li><a href="{{ route('service.maklumat') }}">Maklumat Pelayanan</a></li>
-                            <li><a href="{{ route('service.standar') }}">Standar Pelayanan Publik</a></li>
+                            <li><a href="{{ route('service.pelayanan.publik') }}">Standar Pelayanan Publik</a></li>
                             <li><a href="{{ route('service.survey') }}">Survei Kepuasan Masyarakat</a></li>
                             <li><a href="{{ route('service.complaint') }}">Pelayanan dan Pengaduan Masyarakat</a>
                             </li>

@@ -20,7 +20,7 @@ Route::get('/tata-cara-daftar', [HomeController::class, 'registrationGuide'])->n
 
 Route::prefix('pelayanan')->name('service.')->group(function () {
     Route::get('/maklumat', [HomeController::class, 'maklumat'])->name('maklumat');
-    Route::get('/standar', [HomeController::class, 'standar'])->name('standar');
+    Route::get('/standar-pelayanan-publik', [HomeController::class, 'standar'])->name('pelayanan.publik');
     Route::get('/survei-kepuasan', [HomeController::class, 'surveySatisfaction'])->name('survey');
     Route::get('/pengaduan', [HomeController::class, 'complaint'])->name('complaint');
     Route::get('/survei-alumni', [HomeController::class, 'surveyAlumni'])->name('alumni');
