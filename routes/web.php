@@ -31,9 +31,8 @@ Route::get('/berita', [HomeController::class, 'news'])->name('public.news');
 Route::get('/informasi-pelatihan', [HomeController::class, 'trainingInfo'])->name('public.training');
 Route::get('/{post:slug}', [HomeController::class, 'postDetail'])->name('public.post.show');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
     Route::prefix('department')->name('department.')->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('index');
         Route::get('/{department}', [DepartmentController::class, 'show'])->name('show');

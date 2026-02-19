@@ -163,6 +163,7 @@ return [
         //app
         App\Providers\AppServiceProvider::class,
         App\Providers\MenuServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
     ],
 
     /*
