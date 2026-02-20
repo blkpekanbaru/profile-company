@@ -36,7 +36,7 @@
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="card-title mb-0">
-                        <h5 class="mb-0 me-2">8</h5>
+                        <h5 class="mb-0 me-2">{{ $totalDepartment }}</h5>
                         <small>Total Kejuruan Aktif</small>
                     </div>
                     <div class="card-icon">
@@ -51,7 +51,7 @@
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="card-title mb-0">
-                        <h5 class="mb-0 me-2">15</h5>
+                        <h5 class="mb-0 me-2">{{ $totalTraining }}</h5>
                         <small>Total Pelatihan Aktif</small>
                     </div>
                     <div class="card-icon">
@@ -66,7 +66,7 @@
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="card-title mb-0">
-                        <h5 class="mb-0 me-2">320</h5>
+                        <h5 class="mb-0 me-2">{{ $totalParticipants }}</h5>
                         <small>Total Peserta Pelatihan Aktif</small>
                     </div>
                     <div class="card-icon">
@@ -81,7 +81,7 @@
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="card-title mb-0">
-                        <h5 class="mb-0 me-2">5</h5>
+                        <h5 class="mb-0 me-2">{{ $totalComplaint }}</h5>
                         <small>Pengaduan Masuk</small>
                     </div>
                     <div class="card-icon">
@@ -93,7 +93,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-xl-12 mb-4">
+        {{-- <div class="col-12 col-xl-12 mb-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-title mb-0">
@@ -218,7 +218,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 @endsection
