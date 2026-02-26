@@ -37,7 +37,7 @@
                                 <div class="nav-column">
                                     <h6>Tentang Kami</h6>
                                     <nav class="footer-nav">
-                                        <a href="#!">Our Story</a>
+                                        <a href="{{ route('about') }}">Tentang Kami</a>
                                         <a href="#!">Design Process</a>
                                         <a href="#!">Portfolio</a>
                                         <a href="#!">Case Studies</a>
