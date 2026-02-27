@@ -1045,6 +1045,12 @@ section,
     padding: 5rem 0 0 0;
 }
 
+@media (max-width: 990px) {
+    .hero .hero-content{
+        padding: 0;
+    }
+}
+
 .hero .hero-content .trust-badges {
     display: flex;
     gap: 1.5rem;
@@ -1084,6 +1090,12 @@ section,
     line-height: 1.2;
     margin: 1.5rem 0;
     color: var(--heading-color);
+}
+
+@media (max-width: 990px) {
+    .hero .hero-content h1{
+        margin: 0;
+    }
 }
 
 .hero .hero-content h1 .highlight {
@@ -1351,6 +1363,7 @@ section,
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
+
 
 @media (max-width: 768px) {
     .hero .hero-visual .main-image .floating-card.opening-hours-card {
@@ -2824,9 +2837,9 @@ section,
     }
 }
 
-.call-to-action .features-section {
+/* .call-to-action .features-section {
     margin-bottom: 120px;
-}
+} */
 
 .call-to-action .features-section .feature-block {
     padding: 60px 40px;
@@ -3248,9 +3261,9 @@ section,
     display: block;
 }
 
-.departments-tabs .medical-specialties {
+/* .departments-tabs .medical-specialties {
     margin-top: 3rem;
-}
+} */
 
 .departments-tabs .specialty-navigation {
     margin-bottom: 2rem;

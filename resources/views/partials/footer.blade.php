@@ -19,7 +19,7 @@
                             </div>
                             <div class="contact-item">
                                 <i class="bi bi-telephone"></i>
-                                <span>+1 (555) 987-6543</span>
+                                <span>082364267742</span>
                             </div>
                             <div class="contact-item">
                                 <i class="bi bi-envelope"></i>

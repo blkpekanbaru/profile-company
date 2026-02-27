@@ -10,7 +10,7 @@
         <div class="container" data-aos="fade-up" data-aos-delay="100">
 
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-2 order-lg-1">
                     <div class="hero-content">
 
                         <h1 data-aos="fade-right" data-aos-delay="300">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-1 order-lg-2">
                     <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
                         <div class="main-image">
                             <img src="{{ asset('assets/img/blk-3d.jpg') }}" alt="Bangunan Satpel PVP Pekanbaru"
