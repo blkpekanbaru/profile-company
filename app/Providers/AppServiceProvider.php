@@ -24,6 +24,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        View::share('departments', Department::where('status', 1)->orderBy('name', 'asc')->get());
+        if (Schema::hasTable('departments')) {
+            View::share(
+                'departments',
+                Department::where('status', 1)
+                    ->orderBy('name', 'asc')
+                    ->get()
+            );
+        }
     }
 }
