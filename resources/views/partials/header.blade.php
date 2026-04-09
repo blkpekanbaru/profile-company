@@ -8,9 +8,9 @@
                 <i class="bi bi-phone d-flex align-items-center ms-4"><span>082364267742</span></i>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
-                <a href="#!" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#!" class="tiktok"><i class="bi bi-tiktok"></i></a>
-                <a href="#!" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/blkpekanbaru/" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.tiktok.com/@blkpekanbaru?_r=1&_t=ZS-95NpA9LrjaW" target="_blank" class="tiktok"><i class="bi bi-tiktok"></i></a>
+                <a href="https://wa.me/6282364267742" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
 
             </div>
         </div>

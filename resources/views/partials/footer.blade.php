@@ -37,11 +37,8 @@
                                 <div class="nav-column">
                                     <h6>Tentang Kami</h6>
                                     <nav class="footer-nav">
-                                        <a href="{{ route('about') }}">Tentang Kami</a>
-                                        <a href="#!">Design Process</a>
-                                        <a href="#!">Portfolio</a>
-                                        <a href="#!">Case Studies</a>
-                                        <a href="#!">Awards</a>
+                                        <a href="{{ route('about') }}">Profil</a>
+                                        <a href="{{ route('facilities') }}">Sarana & Prasarana</a>
                                     </nav>
                                 </div>
                             </div>
@@ -50,24 +47,23 @@
                                 <div class="nav-column">
                                     <h6>Jelajahi Pelatihan</h6>
                                     <nav class="footer-nav">
-                                        <a href="#!">Brand Identity</a>
-                                        <a href="#!">Web Design</a>
-                                        <a href="#!">Mobile Apps</a>
-                                        <a href="#!">Digital Strategy</a>
-                                        <a href="#!">Consultation</a>
+                                        @foreach ($departments as $dept)
+                                            <a href="{{ route('workshop.detail', $dept->slug) }}">
+                                                Kejuruan {{ $dept->name }}
+                                            </a>
+                                        @endforeach
                                     </nav>
                                 </div>
                             </div>
 
                             <div class="col-6 col-lg-3">
                                 <div class="nav-column">
-                                    <h6>Hubungi Kami</h6>
+                                    <h6>Kontak Kami</h6>
                                     <nav class="footer-nav">
-                                        <a href="#!">Start Project</a>
-                                        <a href="#!">Schedule Call</a>
-                                        <a href="#!">Join Newsletter</a>
-                                        <a href="#!">Follow Updates</a>
-                                        <a href="#!">Partnership</a>
+                                        <a href="#!"><i class="fab fa-instagram me-2"></i>blkpekanbaru</a>
+                                        <a href="#!"><i class="fab fa-tiktok me-2"></i>blkpekanbaru</a>
+                                        <a href="#!"><i class="fab fa-whatsapp me-2"></i>082364267742</a>
+                                        <a href="#!"><i class="fas fa-globe me-2"></i>bpvppekanbaru.kemnaker.go.id</a>
                                     </nav>
                                 </div>
                             </div>
