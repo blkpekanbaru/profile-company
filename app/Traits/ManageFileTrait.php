@@ -11,11 +11,9 @@ trait ManageFileTrait
     {
         $fileName = time() . '_' . Str::random(8) . '.' . $file->extension();
 
-        $file->move(storage_path('app/public/' . $folder), $fileName);
+        Storage::disk('public')->putFileAs($folder, $file, $fileName);
 
-        $path = $folder . '/' . $fileName;
-
-        return $path;
+        return $folder . '/' . $fileName;
     }
 
     function updateFile($file, $folder, $oldPathFile)
