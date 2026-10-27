@@ -25,7 +25,7 @@ class HomeController extends Controller
         $posts = Post::with(['images', 'categories'])
             ->where('status', PostStatusEnum::PUBLISHED)
             ->latest()
-            ->take(6)
+            ->take(3)
             ->get();
 
         return view('pages.home', compact('totalDepartments', 'totalWorkshops', 'departments', 'posts'));
@@ -73,7 +73,10 @@ class HomeController extends Controller
 
     public function registrationGuide()
     {
-        return view('pages.registration_guide');
+        $guide = Profile::where('key', 'registration_guide')->first();
+        $steps = $guide && $guide->content ? json_decode($guide->content) : [];
+
+        return view('pages.registration_guide', compact('guide', 'steps'));
     }
 
     public function maklumat()
@@ -98,7 +101,7 @@ class HomeController extends Controller
     {
         return view('pages.services.complaint', [
             'title' => 'Pelayanan dan Pengaduan Masyarakat',
-            'form_url' => 'https://docs.google.com/forms/d/e/1FAIpQLSdHJxZVnCJ4k3sR2FtIWHVGiSkdcappYWMjWXX3BFm_U_1AyA/viewform?embedded=true'
+            'form_url' => 'https://docs.google.com/forms/d/e/1FAIpQLSeDhi_UZutOMo4FRVQlKuRc3wVNEIOsRr37J1AvrCsNKT7y-Q/viewform?embedded=true'
         ]);
     }
 

@@ -79,3 +79,33 @@
         </div>
     </section>
 @endsection
+
+@push('styles')
+    <style>
+        /* Mengembalikan gaya list bawaan hanya di dalam konten artikel */
+        .blog-details .content ul {
+            list-style-type: disc !important;
+            padding-left: 2rem !important;
+            margin-bottom: 1rem;
+        }
+
+        .blog-details .content ol {
+            list-style-type: decimal !important;
+            padding-left: 2rem !important;
+            margin-bottom: 1rem;
+        }
+
+        .blog-details .content li {
+            margin-bottom: 0.5rem;
+            display: list-item !important;
+        }
+
+        /* Gaya untuk list bersarang (nested list) */
+        .blog-details .content ul ul,
+        .blog-details .content ol ul {
+            list-style-type: circle !important;
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+    </style>
+@endpush

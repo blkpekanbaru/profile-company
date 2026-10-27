@@ -1,12 +1,11 @@
 @extends('admin.layouts.layoutMaster')
 
-@section('title', 'Kejuruan')
+@section('title', 'Pelatihan')
 
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
-    <!-- Form Validation -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/animate-css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
@@ -14,11 +13,9 @@
 
 @section('vendor-script')
     <script src="{{ asset('admin/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <!-- Form Validation -->
     <script src="{{ asset('admin/assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
-
     <script src="{{ asset('admin/assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
 @endsection
 
@@ -52,6 +49,49 @@
                     buttonsStyling: false
                 });
             }
+
+            function populateEditExtraFields(data) {
+                if (!data) return;
+
+                $('#editRegistrationLink').val(data.registration_link || '');
+                $('.edit-benefit-checkbox').prop('checked', false);
+
+                let benefits = data.benefits;
+                if (typeof benefits === 'string') {
+                    try {
+                        benefits = JSON.parse(benefits);
+                    } catch (e) {
+                        benefits = [];
+                    }
+                }
+
+                if (Array.isArray(benefits)) {
+                    $('.edit-benefit-checkbox').each(function() {
+                        if (benefits.includes($(this).val())) {
+                            $(this).prop('checked', true);
+                        }
+                    });
+                }
+            }
+
+            $(document).ajaxSuccess(function(event, xhr, settings) {
+                if (settings.url && settings.url.includes('/edit') && xhr.responseJSON) {
+                    populateEditExtraFields(xhr.responseJSON);
+                }
+            });
+
+            $(document).on('click', '.datatables-workshops tbody tr a, .datatables-workshops tbody tr button', function() {
+                const tableEl = $('.datatables-workshops');
+                if ($.fn.DataTable.isDataTable(tableEl)) {
+                    const tr = $(this).closest('tr');
+                    const rowData = tableEl.DataTable().row(tr).data();
+                    if (rowData) {
+                        setTimeout(function() {
+                            populateEditExtraFields(rowData);
+                        }, 100);
+                    }
+                }
+            });
         })();
     </script>
 @endsection
@@ -63,7 +103,7 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+            <ul class="mb-0">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -121,11 +161,54 @@
                 </div>
 
                 <div class="col-sm-12">
-                    <label class="form-label">Link Proglat Kemnaker / SIAPkerja</label>
+                    <label class="form-label">Link Proglat Kemnaker</label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="ti ti-link"></i></span>
                         <input type="url" name="external_link" class="form-control"
-                            placeholder="https://pelatihan.kemnaker.go.id/..." required />
+                            placeholder="https://proglat.kemnaker.go.id/..." required />
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <label class="form-label">Link SIAPkerja</label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="ti ti-external-link"></i></span>
+                        <input type="url" name="registration_link" class="form-control"
+                            placeholder="https://pelatihan.kemnaker.go.id/..." />
+                    </div>
+                </div>
+
+                <div class="col-sm-12 mt-2">
+                    <label class="form-label d-block mb-2">Benefit Pelatihan</label>
+                    <div class="border rounded p-3 bg-lighter">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" name="benefits[]" value="Biaya pelatihan GRATIS!" id="addBenefit1" checked>
+                            <label class="form-check-label" for="addBenefit1">Biaya pelatihan GRATIS!</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" name="benefits[]" value="Uang saku" id="addBenefit2" checked>
+                            <label class="form-check-label" for="addBenefit2">Uang saku</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" name="benefits[]" value="Makan siang selama pelatihan" id="addBenefit3" checked>
+                            <label class="form-check-label" for="addBenefit3">Makan siang selama pelatihan</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" name="benefits[]" value="Seragam lengkap" id="addBenefit4" checked>
+                            <label class="form-check-label" for="addBenefit4">Seragam lengkap</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" name="benefits[]" value="Sertifikasi BNSP" id="addBenefit5" checked>
+                            <label class="form-check-label" for="addBenefit5">Sertifikasi BNSP</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" name="benefits[]" value="Sertifikat pelatihan" id="addBenefit6" checked>
+                            <label class="form-check-label" for="addBenefit6">Sertifikat pelatihan</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="benefits[]" value="Pengalaman kerja melalui On the Job Training (OJT)" id="addBenefit7">
+                            <label class="form-check-label" for="addBenefit7">Pengalaman kerja melalui On the Job Training (OJT)</label>
+                        </div>
                     </div>
                 </div>
 
@@ -133,7 +216,7 @@
                     <label class="form-label">Foto Pelatihan</label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="ti ti-image"></i></span>
-                        <input type="file" name="image" class="form-control" accept="image/png, image/jpeg, image/jpeg, image/webp" />
+                        <input type="file" name="image" class="form-control" accept="image/png, image/jpeg, image/jpg, image/webp" />
                     </div>
                 </div>
 
@@ -180,6 +263,49 @@
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="ti ti-link"></i></span>
                         <input type="url" id="editLink" name="external_link" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <label class="form-label">Link SIAPkerja</label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="ti ti-external-link"></i></span>
+                        <input type="url" id="editRegistrationLink" name="registration_link" class="form-control"
+                            placeholder="https://pelatihan.kemnaker.go.id/..." />
+                    </div>
+                </div>
+
+                <div class="col-sm-12 mt-2">
+                    <label class="form-label d-block mb-2">Benefit Pelatihan</label>
+                    <div class="border rounded p-3 bg-lighter">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input edit-benefit-checkbox" type="checkbox" name="benefits[]" value="Biaya pelatihan GRATIS!" id="editBenefit1">
+                            <label class="form-check-label" for="editBenefit1">Biaya pelatihan GRATIS!</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input edit-benefit-checkbox" type="checkbox" name="benefits[]" value="Uang saku" id="editBenefit2">
+                            <label class="form-check-label" for="editBenefit2">Uang saku</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input edit-benefit-checkbox" type="checkbox" name="benefits[]" value="Makan siang selama pelatihan" id="editBenefit3">
+                            <label class="form-check-label" for="editBenefit3">Makan siang selama pelatihan</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input edit-benefit-checkbox" type="checkbox" name="benefits[]" value="Seragam lengkap" id="editBenefit4">
+                            <label class="form-check-label" for="editBenefit4">Seragam lengkap</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input edit-benefit-checkbox" type="checkbox" name="benefits[]" value="Sertifikasi BNSP" id="editBenefit5">
+                            <label class="form-check-label" for="editBenefit5">Sertifikasi BNSP</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input edit-benefit-checkbox" type="checkbox" name="benefits[]" value="Sertifikat pelatihan" id="editBenefit6">
+                            <label class="form-check-label" for="editBenefit6">Sertifikat pelatihan</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input edit-benefit-checkbox" type="checkbox" name="benefits[]" value="Pengalaman kerja melalui On the Job Training (OJT)" id="editBenefit7">
+                            <label class="form-check-label" for="editBenefit7">Pengalaman kerja melalui On the Job Training (OJT)</label>
+                        </div>
                     </div>
                 </div>
 

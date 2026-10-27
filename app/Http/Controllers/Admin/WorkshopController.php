@@ -35,11 +35,13 @@ class WorkshopController extends BaseController
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'department_id' => 'required|exists:departments,id',
             'name' => 'required|string|max:255',
             'external_link' => 'required|url',
+            'registration_link' => 'nullable|url',
+            'benefits' => 'nullable|array',
+            'benefits.*' => 'string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
         ]);
 
@@ -49,6 +51,8 @@ class WorkshopController extends BaseController
             $workshop->name = $request->name;
             $workshop->department_id = $request->department_id;
             $workshop->external_link = $request->external_link;
+            $workshop->registration_link = $request->registration_link;
+            $workshop->benefits = $request->input('benefits', []);
             $workshop->slug = Str::slug($request->name);
             $workshop->status = 1;
 
@@ -79,6 +83,9 @@ class WorkshopController extends BaseController
             'department_id' => 'required|exists:departments,id',
             'name' => 'required|string|max:255',
             'external_link' => 'required|url',
+            'registration_link' => 'nullable|url',
+            'benefits' => 'nullable|array',
+            'benefits.*' => 'string',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,webp|max:10240',
         ]);
 
@@ -90,8 +97,10 @@ class WorkshopController extends BaseController
             $workshop->name = $request->name;
             $workshop->department_id = $request->department_id;
             $workshop->external_link = $request->external_link;
+            $workshop->registration_link = $request->registration_link;
+            $workshop->benefits = $request->input('benefits', []);
             $workshop->slug = Str::slug($request->name);
-            $workshop->status = 1;
+            $workshop->status = $request->input('status', 1);
 
             if ($request->hasFile('image')) {
                 $workshop->image = $this->updateFile($request->file('image'), 'workshops', $workshop->image);
@@ -101,9 +110,9 @@ class WorkshopController extends BaseController
 
             if ($oldDepartmentId !== $newDepartmentId) {
                 Department::where('id', $oldDepartmentId)->decrement('total_workshops');
-
                 Department::where('id', $newDepartmentId)->increment('total_workshops');
             }
+
             DB::commit();
             return redirect()->back()->with('swal-success', 'Program Pelatihan berhasil diperbarui!');
         } catch (\Exception $e) {

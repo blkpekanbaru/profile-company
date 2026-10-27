@@ -63,6 +63,12 @@
             "slug": "facility"
         },
         {
+            "url": "admin/profile/registration_guide",
+            "name": "Tata Cara Pendaftaran",
+            "icon": "menu-icon tf-icons ti ti-clipboard-list",
+            "slug": "registration-guide"
+        },
+        {
             "menuHeader": "Manajemen Informasi"
         },
         {

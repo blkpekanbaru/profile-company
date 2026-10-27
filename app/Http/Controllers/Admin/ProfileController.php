@@ -14,16 +14,15 @@ class ProfileController extends BaseController
 
     public function edit($key)
     {
-        // Mencari data atau membuat instance baru jika belum ada
         $profile = Profile::where('key', $key)->first() ?? new Profile(['key' => $key]);
 
-        // Mapping title agar dinamis di view
         $titles = [
             'history' => 'Sejarah & Transformasi',
             'vision_mission' => 'Visi dan Misi',
             'structure' => 'Struktur Organisasi',
             'main_task' => 'Tugas Pokok',
             'functions' => 'Fungsi',
+            'registration_guide' => 'Tata Cara Pendaftaran',
         ];
 
         $pageTitle = $titles[$key] ?? 'Profil Konten';
@@ -33,10 +32,14 @@ class ProfileController extends BaseController
 
     public function update(Request $request, $key)
     {
+        $mediaValidation = $key === 'registration_guide'
+            ? 'nullable|file|mimes:mp4,webm,jpeg,png,jpg|max:51200'
+            : 'nullable|image|mimes:jpeg,png,jpg|max:5120';
+
         $request->validate([
             'title' => 'required|string',
             'content' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:5120', // Maksimal 5MB
+            'image' => $mediaValidation,
         ]);
 
         DB::beginTransaction();
@@ -48,7 +51,6 @@ class ProfileController extends BaseController
                 'content' => $request->input('content'),
             ];
 
-            // Jika ada upload gambar (khusus struktur organisasi)
             if ($request->hasFile('image')) {
                 if ($profile && $profile->image) {
                     $data['image'] = $this->updateFile($request->file('image'), 'profiles', $profile->image);
@@ -57,7 +59,6 @@ class ProfileController extends BaseController
                 }
             }
 
-            // Simpan atau Update
             Profile::updateOrCreate(['key' => $key], $data);
 
             DB::commit();

@@ -8,13 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Workshop extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'department_id',
         'name',
         'slug',
         'image',
         'external_link',
+        'registration_link',
+        'benefits',
         'status',
+    ];
+
+    protected $casts = [
+        'benefits' => 'array',
     ];
 
     public function getRouteKeyName()
